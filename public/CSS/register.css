@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+}
+.container {
+  margin: 20%;
+  text-align: center;
+}
+form {
+  height: 300px;
+}
+.id {
+  height: 100px;
+  width: 650px;
+}
+.id input[type="text"] {
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 490px;
+  height: 50px;
+}
+.id input {
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 140px;
+  height: 50px;
+}
+.password {
+  height: 100px;
+  width: 500px;
+}
+.password input {
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 490px;
+  height: 50px;
+}
+.password-check {
+  height: 100px;
+  width: 500px;
+}
+.password-check input {
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 490px;
+  height: 50px;
+}
+
+.nick {
+  height: 100px;
+  width: 650px;
+}
+.nick input[type="text"] {
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 490px;
+  height: 50px;
+}
+.nick input {
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 140px;
+  height: 50px;
+}
+
+.check {
+  width: 500px;
+  height: 100px;
+}
+
+.check input[type="submit"] {
+  float: left;
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 140px;
+  height: 50px;
+}
+.check input[type="button"] {
+  float: right;
+  font-size: 25px;
+  border: solid 1px;
+  padding-left: 9px;
+  width: 140px;
+  height: 50px;
+}
