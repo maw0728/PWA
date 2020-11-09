@@ -9,6 +9,7 @@ const passport = require("passport");
 
 dotenv.config();
 const pageRouter = require("./routes/index");
+const registerRouter = require("./routes/register");
 const { sequelize } = require("./models");
 // const passportConfig = require("./passport");
 
@@ -50,7 +51,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", pageRouter);
-
+app.use("/register", registerRouter);
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기중");
 });
