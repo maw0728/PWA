@@ -10,7 +10,12 @@
     <div class="container">
       <form action="register/register_process" method="post">
         <div class="id">
-          <input type="text" name="id" placeholder="아이디를 입력하세요" />
+          <input
+            type="text"
+            name="id"
+            placeholder="아이디를 입력하세요"
+            id="id"
+          />
           <input type="button" value="중복확인" id="id-overlap-check" />
         </div>
         <div class="password">
@@ -44,4 +49,6 @@
       </form>
     </div>
   </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="JS/register.js"></script>
 </html>
