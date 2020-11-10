@@ -7,6 +7,8 @@ idCheck.onclick = async () => {
     });
     if (idsCheck.data.check == true) {
       alert("중복된아이디");
+    } else if (idsCheck.data.check ==false){
+      alert('사용가능한아이디입니다')
     }
   } catch (error) {
     console.log(error);
@@ -22,6 +24,8 @@ nickCheck.onclick = async () => {
     });
     if (nicksCheck.data.check == true) {
       alert("중복된닉네임");
+    }else if (nicksCheck.data.check ==false){
+      alert('사용가능한닉네임입니다')
     }
   } catch (error) {
     console.log(error);
