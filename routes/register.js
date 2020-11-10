@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
   res.render("register");
 });
 
+
 router.post("/register_process", (req, res) => {
   User.create({
     userId: req.body.id,
