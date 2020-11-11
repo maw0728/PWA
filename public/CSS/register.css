@@ -78,7 +78,7 @@ form {
   height: 100px;
 }
 
-.check input[type="submit"] {
+.check > #submit {
   float: left;
   font-size: 25px;
   border: solid 1px;

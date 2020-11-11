@@ -8,15 +8,21 @@
   </head>
   <body>
     <div class="container">
-      <form action="register_proceess" method="post">
+      <form action="register/register_process" method="post">
         <div class="id">
-          <input type="text" name="id" placeholder="아이디를 입력하세요" />
+          <input
+            type="text"
+            name="id"
+            placeholder="아이디를 입력하세요"
+            id="id"
+          />
           <input type="button" value="중복확인" id="id-overlap-check" />
         </div>
         <div class="password">
           <input
             type="password"
             name="password"
+            id="password"
             placeholder="비밀번호를 입력하세요"
           />
         </div>
@@ -38,10 +44,12 @@
           <input type="button" value="중복확인" id="nick-overlap-check" />
         </div>
         <div class="check">
-          <input type="submit" value="확인" />
-          <input type="button" value="취소" />
+          <input type="button" value="확인" id="submit"/>
+          <input type="button" value="취소" id="cancel"/>
         </div>
       </form>
     </div>
   </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="JS/register.js"></script>
 </html>
