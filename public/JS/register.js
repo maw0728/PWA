@@ -31,3 +31,18 @@ nickCheck.onclick = async () => {
     console.log(error);
   }
 };
+
+const password = document.getElementById('password');
+const passwordCheck = document.getElementById('password-check');
+
+passwordCheck.onkeyup=()=>{
+  const passValue = password.value
+  const checkValue = passwordCheck.value
+  console.log('a'+passValue);
+  console.log('b'+checkValue);
+  if (passValue === checkValue) {
+    passwordCheck.style.outlineColor ='black'
+  } else {
+    passwordCheck.style.outlineColor ='red'
+  }
+}
