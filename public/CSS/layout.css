@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#container {
+  width: 1200px;
+  height: 100%;
+  border: 1px solid black;
+  margin-left: 360px;
+}
+#header {
+  position: sticky;
+  top: 0;
+  width: 1200px;
+  height: 150px;
+}
+#user {
+  width: 1200px;
+  height: 50px;
+}
+#logo {
+  float: left;
+  width: 200px;
+  height: 100px;
+}
+#nav {
+  float: left;
+  width: 1000px;
+  height: 100px;
+}
+#content {
+  width: 1200px;
+  height: 100%;
+}
+#footer {
+  width: 1200px;
+  height: 100px;
+}
