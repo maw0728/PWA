@@ -6,12 +6,12 @@ const session = require("express-session");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
 const passport = require("passport");
-const passportConfig=require('./passport');
-
+const passportConfig = require("./passport");
 
 dotenv.config();
 const pageRouter = require("./routes/index");
 const registerRouter = require("./routes/register");
+const video = require("./routes/video");
 const { sequelize, User } = require("./models");
 // const passportConfig = require("./passport");
 
@@ -55,6 +55,8 @@ app.use(passport.session());
 
 app.use("/", pageRouter);
 app.use("/register", registerRouter);
+app.use("/video", video);
+
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기중");
 });
