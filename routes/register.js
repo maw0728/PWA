@@ -2,13 +2,14 @@ const express = require("express");
 const axios = require("axios").default;
 const User = require("../models/user");
 const router = express.Router();
+const {isLoggedIn,isNotLoggedIn}=require('./middleware');
 
-router.get("/", (req, res) => {
+router.get("/",isNotLoggedIn, (req, res) => {
   res.render("register");
 });
 
 
-router.post("/register_process", (req, res) => {
+router.post("/register_process",isNotLoggedIn, (req, res) => {
   User.create({
     userId: req.body.id,
     password: req.body.password,
@@ -17,7 +18,7 @@ router.post("/register_process", (req, res) => {
   res.redirect("/");
 });
 
-router.post("/idCheck", async (req, res, next) => {
+router.post("/idCheck", isNotLoggedIn,async (req, res, next) => {
   console.log(req.body.ids);
   try {
     const maxId = await User.findAll({
@@ -47,7 +48,7 @@ router.post("/idCheck", async (req, res, next) => {
   }
 });
 
-router.post("/nickCheck", async (req, res, next) => {
+router.post("/nickCheck", isNotLoggedIn, async (req, res, next) => {
   try {
     const maxId = await User.findAll({
       attributes: ["id"],
