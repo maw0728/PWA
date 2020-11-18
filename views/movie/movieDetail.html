@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+<!-- css -->
+{% block style %}
+<link rel="stylesheet" href="`/CSS/movie/${type}.css`" />
+{% if type === 'read' %}
+<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+{% endif %} {% endblock %}
+
+<!-- mainpage -->
+{% block content %} {% if type === 'create' %}
+
+<form action="/movie/create" method="post" enctype="multipart/form-data">
+  <input
+    type="text"
+    name="name"
+    id="name"
+    placeholder="영화제목을 입력해주세요"
+  />
+  <input type="text" name="director" id="director" placeholder="감독" />
+  <input type="text" name="actor" id="actor" placeholder="배우" />
+  <input type="text" name="year" id="year" placeholder="제작년도" />
+  <input type="text" name="country" id="country" placeholder="제작국가" />
+  <input type="text" name="category" id="category" placeholder="영화장르" />
+  <input type="text" name="class" id="clas" placeholder="상영등급" />
+  <input type="file" name="movie" id="movie" />
+  <input type="submit" value="확인" />
+</form>
+
+{% elif type === 'read' %}
+<div id="movieTitle">
+  <h1>{{movie.name}}</h1>
+</div>
+<input
+  type="button"
+  value="수정하기"
+  onclick="location.href='/video/movie/update/{{movie.id}}'"
+/>
+
+<video
+  id="my-video"
+  class="video-js"
+  controls
+  preload="auto"
+  width="640"
+  height="264"
+  poster="MY_VIDEO_POSTER.jpg"
+  data-setup="{}"
+>
+  <source src="/movie/{{movie.original}}" type="video/mp4" />
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a web
+    browser that
+    <a href="https://videojs.com/html5-video-support/" target="_blank"
+      >supports HTML5 video</a
+    >
+  </p>
+</video>
+
+{% elif type === 'update' %}
+<h1>업데이트다</h1>
+{% endif %} {% endblock %}
+
+<!-- script -->
+{% block scriot %}
+<script src="`/JS/movie/${type}.js`"></script>
+{% if type === 'read' %}
+<script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
+{% endif %} {% endblock %}

@@ -11,9 +11,9 @@ const passportConfig = require("./passport");
 dotenv.config();
 const pageRouter = require("./routes/index");
 const registerRouter = require("./routes/register");
-const video = require("./routes/video");
-const boardRouter=require('./routes/board');
-const { sequelize, User,Board } = require("./models");
+const movie = require("./routes/movie");
+const boardRouter = require("./routes/board");
+const { sequelize, User, Board } = require("./models");
 // const passportConfig = require("./passport");
 
 const app = express();
@@ -36,7 +36,7 @@ sequelize
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/img", express.static(path.join(__dirname, "uploads")));
+app.use("/movie", express.static(path.join(__dirname, "videos/movie")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -56,14 +56,14 @@ app.use(passport.session());
 
 app.use("/", pageRouter);
 app.use("/register", registerRouter);
-app.use("/video", video);
-app.use("/board",boardRouter);
+app.use("/movie", movie);
+app.use("/board", boardRouter);
 
-app.use((req,res,next)=>{
-  const error=new Error(`라우터가 없습니다.`);
-  error.status=404;
+app.use((req, res, next) => {
+  const error = new Error(`라우터가 없습니다.`);
+  error.status = 404;
   next(error);
-})
+});
 
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기중");
