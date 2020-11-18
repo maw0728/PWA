@@ -2,11 +2,8 @@ const Sequelize = require("sequelize");
 const env = process.env.NODE_ENV || "development";
 const config = require("../config/config")[env];
 const User = require("./user");
-<<<<<<< HEAD
-const Board = require('./board');
-=======
+const Board = require("./board");
 const Movie = require("./movie");
->>>>>>> feature/videoDatabase
 
 const db = {};
 const sequelize = new Sequelize(
@@ -19,21 +16,13 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 
 db.User = User;
-<<<<<<< HEAD
-db.Board=Board;
+db.Board = Board;
+db.Movie = Movie;
 User.init(sequelize);
 Board.init(sequelize);
-
+Movie.init(sequelize);
 User.associate(db);
 Board.associate(db);
-=======
-db.Movie = Movie;
-
-User.init(sequelize);
-Movie.init(sequelize);
-
-User.associate(db);
 Movie.associate(db);
->>>>>>> feature/videoDatabase
 
 module.exports = db;
