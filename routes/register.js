@@ -4,6 +4,8 @@ const User = require("../models/user");
 const router = express.Router();
 const {isLoggedIn,isNotLoggedIn}=require('./middleware');
 
+
+
 router.get("/",isNotLoggedIn, (req, res) => {
   res.render("register");
 });

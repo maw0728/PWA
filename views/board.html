@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>board</title>
+</head>
+<body>
+  <form action="/board/create" method="get">
+    <input type="submit" value="create">
+  </form>
+    <table>
+      <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>writer</td>
+        <td>createdAt</td>
+    </tr>
+    {% for board in boards %}     
+      <tr>
+        <td>{{board.id}}</td>
+        <td><a href="/board/{{board.id}}">{{board.title}}</a></td>
+        <td>
+          {{board.writer}}
+        </td>
+        <td>{{board.createdAt}}</td>
+      </tr>
+   {% endfor %}
+</table>
+</body>
+</html>

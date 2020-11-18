@@ -1,30 +1,35 @@
 const Sequelize = require("sequelize");
 
-module.exports = class User extends Sequelize.Model {
+module.exports = class Board extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        userId: {
-          type: Sequelize.STRING(10),
+        title: {
+          type: Sequelize.STRING(50),
           allowNull: true,
           unique: true,
         },
-        password: {
-          type: Sequelize.STRING(100),
+        content: {
+          type: Sequelize.TEXT,
           allowNull: true,
         },
-        nick: {
+        writer: {
           type: Sequelize.STRING(20),
-          allowNull: true,
-          unique: true,
         },
+        views: {
+            type: Sequelize.INTEGER,
+          },
+          comments: {
+            type: Sequelize.INTEGER,
+          },
+          
       },
       {
         sequelize,
         timestamps: true,
         underscored: false,
-        modelName: "User",
-        tableName: "users",
+        modelName: "Board",
+        tableName: "board",
         paranoid: true,
         charset: "utf8",
         collate: "utf8_general_ci",
@@ -32,6 +37,6 @@ module.exports = class User extends Sequelize.Model {
     );
   }
   static associate(db){
-    db.User.hasMany(db.Board,{foreignKey:"userid",sourceKey:"id"})
+    db.Board.belongsTo(db.User,{foreignKey:"userid",targetKey:"id"})
   }
 };
