@@ -11,7 +11,7 @@ const passportConfig = require("./passport");
 dotenv.config();
 const pageRouter = require("./routes/index");
 const registerRouter = require("./routes/register");
-const video = require("./routes/video");
+const movie = require("./routes/movie");
 const { sequelize, User } = require("./models");
 // const passportConfig = require("./passport");
 
@@ -35,7 +35,7 @@ sequelize
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/img", express.static(path.join(__dirname, "uploads")));
+app.use("/movie", express.static(path.join(__dirname, "videos/movie")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -55,7 +55,7 @@ app.use(passport.session());
 
 app.use("/", pageRouter);
 app.use("/register", registerRouter);
-app.use("/video", video);
+app.use("/movie", movie);
 
 app.listen(app.get("port"), () => {
   console.log(app.get("port"), "번 포트에서 대기중");
