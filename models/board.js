@@ -7,7 +7,6 @@ module.exports = class Board extends Sequelize.Model {
         title: {
           type: Sequelize.STRING(50),
           allowNull: true,
-          unique: true,
         },
         content: {
           type: Sequelize.TEXT,

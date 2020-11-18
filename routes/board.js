@@ -3,6 +3,7 @@ const User = require("../models/user");
 const Board = require('../models/board');
 const router = express.Router();
 const {isLoggedIn,isNotLoggedIn}=require('./middleware');
+const { render } = require('nunjucks');
 
 router.use('*',isLoggedIn);
 
@@ -10,7 +11,7 @@ router.get('/',async(req,res,next)=>{
     
     try{
     const boards=await Board.findAll();
-    res.render('board',{boards});
+    res.render('board',{boards,type:"list"});
     }catch(err){
         console.error(err);
         next(err);
@@ -18,14 +19,13 @@ router.get('/',async(req,res,next)=>{
 })
 router.get('/create',(req,res)=>{
     console.log(req.user)
-    res.render('board_create',{writer:req.user.nick});
+    res.render('board',{writer:req.user.nick,type:"create"});
         
 })
 
 router.post('/create_process',(req,res)=>{
-    console.log('req.user',req.user)
     const {title,content,writer}=req.body;
-    console.log(writer);
+    
     
     Board.create({
         title,
@@ -43,12 +43,42 @@ router.post('/create_process',(req,res)=>{
 router.get('/:id',async(req,res,next)=>{
     
     try{
-    const board=await Board.findOne({where:{id:req.params.id}});
-    console.log('board',board)
-    res.render('board_content',{board});
+    const boards=await Board.findOne({where:{id:req.params.id}});
+    res.render('board',{boards,type:"view"});
     }catch(err){
         console.error(err);
-        next(err);
+        next();
+    }
+});
+router.post("/update/:id", async (req, res, next) => {
+    try {
+      const boards = await Board.findOne({ where: { id: req.params.id } });
+      res.render("board", { boards, type: "update" });
+    } catch (error) {
+      console.log(error);
+      next();
+    }
+  });
+router.post('/update_process/:id',async(req,res,next)=>{
+    try{
+        const boards =await Board.update({
+            title:req.body.updateTitle,
+            content:req.body.updateContent,
+        },{where:{id:req.params.id},});
+        res.redirect(`/board/${req.params.id}`);
+}catch(err){
+    console.error(err);
+    next(err);
+}
+});
+
+router.post('/delete/:id',async(req,res,next)=>{
+    try{
+        await Board.destroy({where:{id:req.params.id}});
+        res.redirect('/board');
+    }catch(err){
+        console.error(err);
+        next();
     }
 })
 
