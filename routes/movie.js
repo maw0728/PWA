@@ -73,13 +73,36 @@ router.get(`/?:id`, async (req, res) => {
 });
 
 // 영화 수정 페이지
-router.get("/update/:id", (req, res) => {
-  res.render("movie/movieDetail.html", { type: "update" });
+router.get("/update/:id", async (req, res) => {
+  try {
+    const movie = await Movie.findOne({ where: { id: req.params.id } });
+    res.render("movie/movieDetail.html", { type: "update", movie });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 //영화 수정 하기
-router.post("/update/:id", (req, res) => {
-  res.render("movie/movieDetail.html", { type: "update" });
+router.post("/update/:id", movie.single("movie"), (req, res) => {
+  const { name, director, actor, year, country, category } = req.body;
+  console.log(req.body);
+  Movie.update(
+    {
+      name,
+      director,
+      actor,
+      year,
+      country,
+      category,
+      class: req.body.clas,
+      runningTime: null,
+      note: null,
+      userid: req.user.id,
+      original: req.file.filename,
+    },
+    { where: { id: req.params.id } }
+  );
+  res.redirect(301, "/movie");
 });
 
 //영화 삭제 하기
