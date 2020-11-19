@@ -3,6 +3,7 @@ const axios = require("axios").default;
 const User = require("../models/user");
 const router = express.Router();
 const {isLoggedIn,isNotLoggedIn}=require('./middleware');
+const bcrypt=require('bcrypt');
 
 
 
@@ -11,13 +12,19 @@ router.get("/",isNotLoggedIn, (req, res) => {
 });
 
 
-router.post("/register_process",isNotLoggedIn, (req, res) => {
-  User.create({
+router.post("/register_process",isNotLoggedIn, async(req, res) => {
+  try{
+    const hash=await bcrypt.hash(password,12);
+    await User.create({
     userId: req.body.id,
-    password: req.body.password,
+    password: hash,
     nick: req.body.nick,
   });
-  res.redirect("/");
+  return res.redirect("/");
+  }catch(err){
+    console.error(err);
+    return next(err);
+  }
 });
 
 router.post("/idCheck", isNotLoggedIn,async (req, res, next) => {
