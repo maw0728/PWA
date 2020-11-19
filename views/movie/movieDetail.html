@@ -57,7 +57,63 @@
 </video>
 
 {% elif type === 'update' %}
-<h1>업데이트다</h1>
+<form
+  action="/movie/update/{{movie.id}}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <input
+    type="text"
+    name="name"
+    id="name"
+    placeholder="영화제목을 입력해주세요"
+    value="{{movie.name}}"
+  />
+  <input
+    type="text"
+    name="director"
+    id="director"
+    placeholder="감독"
+    value="{{movie.director}}"
+  />
+  <input
+    type="text"
+    name="actor"
+    id="actor"
+    placeholder="배우"
+    value="{{movie.actor}}"
+  />
+  <input
+    type="text"
+    name="year"
+    id="year"
+    placeholder="제작년도"
+    value="{{movie.year}}"
+  />
+  <input
+    type="text"
+    name="country"
+    id="country"
+    placeholder="제작국가"
+    value="{{movie.country}}"
+  />
+  <input
+    type="text"
+    name="category"
+    id="category"
+    placeholder="영화장르"
+    value="{{movie.category}}"
+  />
+  <input
+    type="text"
+    name="class"
+    id="clas"
+    placeholder="상영등급"
+    value="{{movie.clas}}"
+  />
+  <input type="file" name="movie" id="movie" />
+  <input type="submit" value="확인" />
+</form>
 {% endif %} {% endblock %}
 
 <!-- script -->

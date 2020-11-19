@@ -15,7 +15,6 @@ const movie = require("./routes/movie");
 const boardRouter = require("./routes/board");
 const { sequelize, User, Board } = require("./models");
 
-
 const app = express();
 passportConfig();
 
