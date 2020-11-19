@@ -12,7 +12,8 @@ router.get("/",isNotLoggedIn, (req, res) => {
 });
 
 
-router.post("/register_process",isNotLoggedIn, async(req, res) => {
+router.post("/register_process",isNotLoggedIn, async(req, res,next) => {
+  const {userId,password,nick}=req.body;
   try{
     const hash=await bcrypt.hash(password,12);
     await User.create({
