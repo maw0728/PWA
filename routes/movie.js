@@ -10,6 +10,7 @@ try {
   fs.readdirSync("videos/movie");
 } catch (error) {
   console.error("movie 폴더가 없어 movie 폴더를 생성합니다.");
+  fs.mkdirSync("videos");
   fs.mkdirSync("videos/movie");
 }
 
