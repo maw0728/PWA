@@ -14,11 +14,11 @@ const registerRouter = require("./routes/register");
 const movie = require("./routes/movie");
 const boardRouter = require("./routes/board");
 const { sequelize, User, Board } = require("./models");
-// const passportConfig = require("./passport");
+
 
 const app = express();
 passportConfig();
-// passportConfig(); // 패스포트 설정
+
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "html");
 nunjucks.configure("views", {
