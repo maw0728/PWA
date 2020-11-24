@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 <!-- css -->
 {% block style %}
-<link rel="stylesheet" href="`/CSS/movie/${type}.css`" />
+<link rel="stylesheet" href="`/CSS/movie/{{type}}.css`" />
 {% if type === 'read' %}
 <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
 {% endif %} {% endblock %}
@@ -33,7 +33,12 @@
 <input
   type="button"
   value="수정하기"
-  onclick="location.href='/video/movie/update/{{movie.id}}'"
+  onclick="location.href='/movie/update/{{movie.id}}'"
+/>
+<input
+  type="button"
+  value="삭제하기"
+  onclick="location.href='/movie/delete/{{movie.id}}'"
 />
 
 <video
@@ -111,14 +116,20 @@
     placeholder="상영등급"
     value="{{movie.clas}}"
   />
-  <input type="file" name="movie" id="movie" />
-  <input type="submit" value="확인" />
+  <input
+    type="text"
+    name="original"
+    id="original"
+    value="{{movie.original}}"
+    readonly
+  />
+  <input type="submit" value="확인" id="submit" />
 </form>
 {% endif %} {% endblock %}
 
 <!-- script -->
-{% block scriot %}
-<script src="`/JS/movie/${type}.js`"></script>
+{% block script %}
+<script src="/JS/movie/{{type}}.js"></script>
 {% if type === 'read' %}
 <script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
 {% endif %} {% endblock %}

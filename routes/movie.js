@@ -45,7 +45,6 @@ router.get("/create", (req, res) => {
 //영화 생성 하기
 router.post("/create", movie.single("movie"), (req, res) => {
   const { name, director, actor, year, country, category } = req.body;
-  console.log(req.body);
   Movie.create({
     name,
     director,
@@ -85,7 +84,6 @@ router.get("/update/:id", async (req, res) => {
 //영화 수정 하기
 router.post("/update/:id", movie.single("movie"), (req, res) => {
   const { name, director, actor, year, country, category } = req.body;
-  console.log(req.body);
   Movie.update(
     {
       name,
@@ -98,7 +96,7 @@ router.post("/update/:id", movie.single("movie"), (req, res) => {
       runningTime: null,
       note: null,
       userid: req.user.id,
-      original: req.file.filename,
+      original: req.body.original,
     },
     { where: { id: req.params.id } }
   );
@@ -107,11 +105,17 @@ router.post("/update/:id", movie.single("movie"), (req, res) => {
 
 //영화 삭제 하기
 router.get("/delete/:id", async (req, res) => {
+  const original = await Movie.findOne({
+    attributes: ["original"],
+    where: { id: req.params.id },
+  });
+  console.log(original.original);
+  fs.unlinkSync("videos/movie/" + original.original);
   try {
-    await Notice.destroy({
+    await Movie.destroy({
       where: { id: req.params.id },
     });
-    res.redirect("movie/movieList");
+    res.redirect("/movie");
   } catch (error) {
     console.log(error);
   }
