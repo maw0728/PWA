@@ -11,7 +11,6 @@ body {
 #container {
   width: 1200px;
   height: 100%;
-  border: 1px solid black;
   margin-left: 360px;
 }
 #header {
@@ -24,6 +23,28 @@ body {
   width: 1200px;
   height: 50px;
 }
+#user ul li {
+  float: left;
+  height: 50px;
+  margin-right: 100px;
+  list-style: none;
+}
+#nick {
+  width: 500px;
+  height: 50px;
+  margin-left: 100px;
+  font-size: 40px;
+  text-align: center;
+}
+#user ul li a {
+  width: 150px;
+  height: 30px;
+  display: block;
+  padding-top: 10px;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+}
 #logo {
   float: left;
   width: 200px;
@@ -33,6 +54,7 @@ body {
   float: left;
   width: 1000px;
   height: 100px;
+  background-color: aqua;
 }
 #content {
   width: 1200px;
@@ -41,4 +63,25 @@ body {
 #footer {
   width: 1200px;
   height: 100px;
+}
+#nav-list {
+  list-style: none;
+  height: 100%;
+}
+#nav-list > li {
+  width: 150px;
+  float: left;
+  list-style: none;
+  height: 100%;
+}
+#nav-list > li > a {
+  margin-left: 50px;
+  height: 75px;
+  display: block;
+  width: 100px;
+  text-align: center;
+  padding-top: 25px;
+  font-size: 25px;
+  text-decoration: none;
+  color: black;
 }

@@ -10,16 +10,26 @@
   <body>
     <div id="container">
       <div id="header">
-        <div id="user">user</div>
+        <div id="user">
+          <ul>
+            <li id="nick">{{user.nick}}님 환영합니다</li>
+            <li><a href="/main">정보수정하기</a></li>
+            <li><a href="/main">로그아웃</a></li>
+          </ul>
+        </div>
         <div id="nav-header">
           <div id="logo">
-            <img src="/img\logo.gif" alt="로고입니다" />
+            <a href="/main"> <img src="/img\logo.gif" alt="로고입니다" /></a>
           </div>
-          <div id="nav">네비</div>
+          <div id="nav">
+            <ul id="nav-list">
+              <li><a href="/board">게시판</a></li>
+              <li><a href="/movie">영화</a></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div id="content">{% block content %} {% endblock %}</div>
-      <div id="footer">푸터</div>
     </div>
   </body>
   <scrip src="https://unpkg.com/axios/dist/axios.min.js"></scrip>
