@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 <!-- css -->
 {% block style %}
-<link rel="stylesheet" href="/movie/read.css" />
+<link rel="stylesheet" href="/CSS/movie/read.css" />
 {% endblock %}
 
 <!-- mainpage -->
@@ -14,8 +14,7 @@
     <th>제작년도</th>
     <th>국가</th>
     <th>장르</th>
-    <th>관람등급</th>
-    <th>상영시간</th>
+    <th>상영등급</th>
   </tr>
   {% for list in movie %}
   <tr>
@@ -25,15 +24,14 @@
     <th>{{list.year}}</th>
     <th>{{list.country}}</th>
     <th>{{list.category}}</th>
-    <th>{{list.class}}</th>
-    <th>{{list.runningTime}}</th>
+    <th>{{list.grade}}</th>
   </tr>
   {% endfor %}
 </table>
-<input type="button" value="만들기" onclick="location.href='/movie/create'" />
+<input type="button" value="만들기" id="create" />
 {% endblock %}
 
 <!-- script -->
-{% block scriot %}
-<script src="/movie/read.js"></script>
+{% block script %}
+<script src="/JS/movie/read.js"></script>
 {% endblock %}

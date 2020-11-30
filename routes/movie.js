@@ -4,8 +4,12 @@ const Movie = require("../models/movie");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const { isLoggedIn, isNotLoggedIn } = require("./middleware");
 
-//영화 전용 폴더 확인
+// 로그인 여부 조회
+router.use("*", isLoggedIn);
+
+// 영화 전용 폴더 확인
 try {
   fs.readdirSync("videos/movie");
 } catch (error) {
@@ -31,7 +35,12 @@ const movie = multer({
 router.get("/", async (req, res) => {
   try {
     const movie = await Movie.findAll();
-    res.render("movie/movieList", { type: "list", movie });
+    res.status(200).render("movie/movieList", {
+      type: "list",
+      movie,
+      nick: req.user.nick,
+      title: "영화조회하기",
+    });
   } catch (error) {
     console.log(error);
   }
@@ -44,7 +53,7 @@ router.get("/create", (req, res) => {
 
 //영화 생성 하기
 router.post("/create", movie.single("movie"), (req, res) => {
-  const { name, director, actor, year, country, category } = req.body;
+  const { name, director, actor, year, country, category, grade } = req.body;
   Movie.create({
     name,
     director,
@@ -52,17 +61,15 @@ router.post("/create", movie.single("movie"), (req, res) => {
     year,
     country,
     category,
-    class: req.body.clas,
-    runningTime: null,
-    note: null,
+    grade,
     userid: req.user.id,
     original: req.file.filename,
   });
-  res.redirect(301, "/movie");
+  res.redirect("/movie");
 });
 
 //영화보기
-router.get(`/?:id`, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const movie = await Movie.findOne({ where: { id: req.params.id } });
     res.render("movie/movieDetail.html", { type: "read", movie });
@@ -83,7 +90,7 @@ router.get("/update/:id", async (req, res) => {
 
 //영화 수정 하기
 router.post("/update/:id", movie.single("movie"), (req, res) => {
-  const { name, director, actor, year, country, category } = req.body;
+  const { name, director, actor, year, country, category, grade } = req.body;
   Movie.update(
     {
       name,
@@ -92,9 +99,7 @@ router.post("/update/:id", movie.single("movie"), (req, res) => {
       year,
       country,
       category,
-      class: req.body.clas,
-      runningTime: null,
-      note: null,
+      grade,
       userid: req.user.id,
       original: req.body.original,
     },
@@ -120,5 +125,4 @@ router.get("/delete/:id", async (req, res) => {
     console.log(error);
   }
 });
-
 module.exports = router;

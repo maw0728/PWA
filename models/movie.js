@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 
-module.exports = class Movie extends Sequelize.Model {
+module.exports = class Movie extends (
+  Sequelize.Model
+) {
   static init(sequelize) {
     return super.init(
       {
@@ -40,7 +42,7 @@ module.exports = class Movie extends Sequelize.Model {
           defaultValue: null,
         },
         // 관람 등급
-        class: {
+        grade: {
           type: Sequelize.STRING(20),
           allowNull: true,
           defaultValue: null,
@@ -48,12 +50,6 @@ module.exports = class Movie extends Sequelize.Model {
         // 상영시간
         runningTime: {
           type: Sequelize.INTEGER,
-          allowNull: true,
-          defaultValue: null,
-        },
-        // 비고
-        note: {
-          type: Sequelize.TEXT("long"),
           allowNull: true,
           defaultValue: null,
         },

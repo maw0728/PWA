@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 <!-- css -->
 {% block style %}
-<link rel="stylesheet" href="`/CSS/movie/{{type}}.css`" />
+<link rel="stylesheet" href="/CSS/movie/{{type}}.css" />
 {% if type === 'read' %}
 <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
 {% endif %} {% endblock %}
@@ -10,22 +10,53 @@
 {% block content %} {% if type === 'create' %}
 
 <form action="/movie/create" method="post" enctype="multipart/form-data">
-  <input
-    type="text"
-    name="name"
-    id="name"
-    placeholder="영화제목을 입력해주세요"
-  />
-  <input type="text" name="director" id="director" placeholder="감독" />
-  <input type="text" name="actor" id="actor" placeholder="배우" />
-  <input type="text" name="year" id="year" placeholder="제작년도" />
-  <input type="text" name="country" id="country" placeholder="제작국가" />
-  <input type="text" name="category" id="category" placeholder="영화장르" />
-  <input type="text" name="class" id="clas" placeholder="상영등급" />
+  <table>
+    <tr>
+      <th>영화제목</th>
+      <th>감독</th>
+      <th>출연자</th>
+      <th>제작년도</th>
+      <th>국가</th>
+      <th>장르</th>
+      <th>상영등급</th>
+    </tr>
+    <tr id="input">
+      <td>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="영화제목을 입력해주세요"
+        />
+      </td>
+      <td>
+        <input type="text" name="director" id="director" placeholder="감독" />
+      </td>
+      <td><input type="text" name="actor" id="actor" placeholder="배우" /></td>
+      <td>
+        <input type="text" name="year" id="year" placeholder="제작년도" />
+      </td>
+      <td>
+        <input type="text" name="country" id="country" placeholder="제작국가" />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="category"
+          id="category"
+          placeholder="영화장르"
+        />
+      </td>
+      <td>
+        <input type="text" name="grade" id="grade" placeholder="상영등급" />
+      </td>
+    </tr>
+  </table>
   <input type="file" name="movie" id="movie" />
-  <input type="submit" value="확인" />
+  <input type="button" value="확인" id="create" />
 </form>
 
+<!-- 자세히보기 -->
 {% elif type === 'read' %}
 <div id="movieTitle">
   <h1>{{movie.name}}</h1>
@@ -61,61 +92,89 @@
   </p>
 </video>
 
+<!-- 수정하기 -->
 {% elif type === 'update' %}
 <form
   action="/movie/update/{{movie.id}}"
   method="post"
   enctype="multipart/form-data"
 >
-  <input
-    type="text"
-    name="name"
-    id="name"
-    placeholder="영화제목을 입력해주세요"
-    value="{{movie.name}}"
-  />
-  <input
-    type="text"
-    name="director"
-    id="director"
-    placeholder="감독"
-    value="{{movie.director}}"
-  />
-  <input
-    type="text"
-    name="actor"
-    id="actor"
-    placeholder="배우"
-    value="{{movie.actor}}"
-  />
-  <input
-    type="text"
-    name="year"
-    id="year"
-    placeholder="제작년도"
-    value="{{movie.year}}"
-  />
-  <input
-    type="text"
-    name="country"
-    id="country"
-    placeholder="제작국가"
-    value="{{movie.country}}"
-  />
-  <input
-    type="text"
-    name="category"
-    id="category"
-    placeholder="영화장르"
-    value="{{movie.category}}"
-  />
-  <input
-    type="text"
-    name="class"
-    id="clas"
-    placeholder="상영등급"
-    value="{{movie.clas}}"
-  />
+  <table>
+    <tr>
+      <th>영화제목</th>
+      <th>감독</th>
+      <th>출연자</th>
+      <th>제작년도</th>
+      <th>국가</th>
+      <th>장르</th>
+      <th>상영등급</th>
+    </tr>
+    <tr id="input">
+      <td>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="영화제목을 입력해주세요"
+          value="{{movie.name}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="director"
+          id="director"
+          placeholder="감독"
+          value="{{movie.director}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="actor"
+          id="actor"
+          placeholder="배우"
+          value="{{movie.actor}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="year"
+          id="year"
+          placeholder="제작년도"
+          value="{{movie.year}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="country"
+          id="country"
+          placeholder="제작국가"
+          value="{{movie.country}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="category"
+          id="category"
+          placeholder="영화장르"
+          value="{{movie.category}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="grade"
+          id="grade"
+          placeholder="상영등급"
+          value="{{movie.grade}}"
+        />
+      </td>
+    </tr>
+  </table>
   <input
     type="text"
     name="original"
@@ -123,7 +182,7 @@
     value="{{movie.original}}"
     readonly
   />
-  <input type="submit" value="확인" id="submit" />
+  <input type="button" value="확인" id="update" />
 </form>
 {% endif %} {% endblock %}
 
