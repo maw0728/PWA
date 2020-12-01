@@ -1,0 +1,194 @@
+{% extends 'layout.html' %}
+<!-- css -->
+{% block style %}
+<link rel="stylesheet" href="/CSS/movie/{{type}}.css" />
+{% if type === 'read' %}
+<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+{% endif %} {% endblock %}
+
+<!-- mainpage -->
+{% block content %} {% if type === 'create' %}
+
+<form action="/movie/create" method="post" enctype="multipart/form-data">
+  <table>
+    <tr>
+      <th>영화제목</th>
+      <th>감독</th>
+      <th>출연자</th>
+      <th>제작년도</th>
+      <th>국가</th>
+      <th>장르</th>
+      <th>상영등급</th>
+    </tr>
+    <tr id="input">
+      <td>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="영화제목을 입력해주세요"
+        />
+      </td>
+      <td>
+        <input type="text" name="director" id="director" placeholder="감독" />
+      </td>
+      <td><input type="text" name="actor" id="actor" placeholder="배우" /></td>
+      <td>
+        <input type="text" name="year" id="year" placeholder="제작년도" />
+      </td>
+      <td>
+        <input type="text" name="country" id="country" placeholder="제작국가" />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="category"
+          id="category"
+          placeholder="영화장르"
+        />
+      </td>
+      <td>
+        <input type="text" name="grade" id="grade" placeholder="상영등급" />
+      </td>
+    </tr>
+  </table>
+  <input type="file" name="movie" id="movie" />
+  <input type="button" value="확인" id="create" />
+</form>
+
+<!-- 자세히보기 -->
+{% elif type === 'read' %}
+<div id="movieTitle">
+  <h1>{{movie.name}}</h1>
+</div>
+<input
+  type="button"
+  value="수정하기"
+  onclick="location.href='/movie/update/{{movie.id}}'"
+/>
+<input
+  type="button"
+  value="삭제하기"
+  onclick="location.href='/movie/delete/{{movie.id}}'"
+/>
+
+<video
+  id="my-video"
+  class="video-js"
+  controls
+  preload="auto"
+  width="640"
+  height="264"
+  poster="MY_VIDEO_POSTER.jpg"
+  data-setup="{}"
+>
+  <source src="/movie/{{movie.original}}" type="video/mp4" />
+  <p class="vjs-no-js">
+    To view this video please enable JavaScript, and consider upgrading to a web
+    browser that
+    <a href="https://videojs.com/html5-video-support/" target="_blank"
+      >supports HTML5 video</a
+    >
+  </p>
+</video>
+
+<!-- 수정하기 -->
+{% elif type === 'update' %}
+<form
+  action="/movie/update/{{movie.id}}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  <table>
+    <tr>
+      <th>영화제목</th>
+      <th>감독</th>
+      <th>출연자</th>
+      <th>제작년도</th>
+      <th>국가</th>
+      <th>장르</th>
+      <th>상영등급</th>
+    </tr>
+    <tr id="input">
+      <td>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="영화제목을 입력해주세요"
+          value="{{movie.name}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="director"
+          id="director"
+          placeholder="감독"
+          value="{{movie.director}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="actor"
+          id="actor"
+          placeholder="배우"
+          value="{{movie.actor}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="year"
+          id="year"
+          placeholder="제작년도"
+          value="{{movie.year}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="country"
+          id="country"
+          placeholder="제작국가"
+          value="{{movie.country}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="category"
+          id="category"
+          placeholder="영화장르"
+          value="{{movie.category}}"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="grade"
+          id="grade"
+          placeholder="상영등급"
+          value="{{movie.grade}}"
+        />
+      </td>
+    </tr>
+  </table>
+  <input
+    type="text"
+    name="original"
+    id="original"
+    value="{{movie.original}}"
+    readonly
+  />
+  <input type="button" value="확인" id="update" />
+</form>
+{% endif %} {% endblock %}
+
+<!-- script -->
+{% block script %}
+<script src="/JS/movie/{{type}}.js"></script>
+{% if type === 'read' %}
+<script src="https://vjs.zencdn.net/7.10.2/video.js"></script>
+{% endif %} {% endblock %}

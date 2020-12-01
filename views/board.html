@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>board</title>
+</head>
+<body>
+  {% if type === 'list' %}
+  <form action="/board/create" method="get">
+    <input type="submit" value="create">
+  </form>
+    <table>
+      <tr>
+        <td>id</td>
+        <td>title</td>
+        <td>writer</td>
+        <td>createdAt</td>
+    </tr>
+    {% for board in boards %}     
+      <tr>
+        <td>{{board.id}}</td>
+        <td><a href="/board/{{board.id}}">{{board.title}}</a></td>
+        <td>
+          {{board.writer}}
+        </td>
+        <td>{{board.createdAt}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+      {% elif type === 'view' %}
+      <p>id:{{boards.id}}</p>
+      <p>title:{{boards.title}}</p>
+      <p>writer:{{boards.writer}}</p>
+      <p>content:{{boards.content}}</p>
+      
+      <form action="/board/update/{{boards.id}}" method="post">
+          <input type="submit" value="update">
+      </form>
+      <form action="/board/delete/{{boards.id}}" method="post">
+      <input type="submit" value="delete">
+      </form>
+      <input type="button" value="list" onclick="location.href='/board'">
+      {% elif type === 'create' %}
+      <form action="/board/create_process" method="post">
+          <p><label for="title">
+              <input type="text" name="title" id="title" placeholder="title">
+          </label></p>
+          <p><label for="content">
+              <textarea name="content" id="content" cols="30" rows="10"></textarea>
+          </label></p>
+          <p><label for="writer">
+              <input type="text" name="writer" id="writer" placeholder="writer" value="{{writer}}" readonly>
+          </label></p>
+          <input type="submit" value="create">
+      </form>
+      
+      {% elif type === 'update' %}
+      <form action="/board/update_process/{{boards.id}}" method="post">
+          <p>title: <input type="text" name="updateTitle" value={{boards.title}} ></p>
+          <p>content: <input type="text" name="updateContent" value={{boards.content}}></p>
+          <input type="submit" value="update">
+      </form>
+      <input type="button" value="cancel" onclick="location.href='/board'">
+      {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+<!-- css -->
+{% block style %}
+<link rel="stylesheet" href="/CSS/movie/read.css" />
+{% endblock %}
+
+<!-- mainpage -->
+{% block content %}
+<table>
+  <tr>
+    <th>영화제목</th>
+    <th>감독</th>
+    <th>출연자</th>
+    <th>제작년도</th>
+    <th>국가</th>
+    <th>장르</th>
+    <th>상영등급</th>
+  </tr>
+  {% for list in movie %}
+  <tr>
+    <th><a href="/movie/{{list.id}}">{{list.name}}</a></th>
+    <th>{{list.director}}</th>
+    <th>{{list.actor}}</th>
+    <th>{{list.year}}</th>
+    <th>{{list.country}}</th>
+    <th>{{list.category}}</th>
+    <th>{{list.grade}}</th>
+  </tr>
+  {% endfor %}
+</table>
+<input type="button" value="만들기" id="create" />
+{% endblock %}
+
+<!-- script -->
+{% block script %}
+<script src="/JS/movie/read.js"></script>
+{% endblock %}

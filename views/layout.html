@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/CSS/layout.css" />
+    {% block style %} {% endblock %}
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <div id="user">
+          <ul>
+            <li id="nick">{{nick}}님 환영합니다</li>
+            <li><a href="/main">정보수정하기</a></li>
+            <li><a href="/main">로그아웃</a></li>
+          </ul>
+        </div>
+        <div id="nav-header">
+          <div id="logo">
+            <a href="/main"> <img src="/img\logo.gif" alt="로고입니다" /></a>
+          </div>
+          <div id="nav">
+            <ul id="nav-list">
+              <li><a href="/board">게시판</a></li>
+              <li><a href="/movie">영화</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="content">{% block content %} {% endblock %}</div>
+    </div>
+  </body>
+  <scrip src="https://unpkg.com/axios/dist/axios.min.js"></scrip>
+  <script src="/JS/layout.js"></script>
+  {% block script %} {% endblock %}
+</html>

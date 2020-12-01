@@ -1,0 +1,25 @@
+table {
+  width: 1200px;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #444444;
+  padding: 10px;
+}
+#update {
+  float: right;
+  margin-top: 10px;
+  width: 100px;
+  height: 50px;
+  background-color: white;
+  border: solid 1px black;
+}
+#input td {
+  width: 100px;
+  padding: 0;
+}
+input {
+  width: 100%;
+  height: 30px;
+}

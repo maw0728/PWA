@@ -2,22 +2,33 @@ const express = require("express");
 const axios = require("axios").default;
 const User = require("../models/user");
 const router = express.Router();
+const {isLoggedIn,isNotLoggedIn}=require('./middleware');
+const bcrypt=require('bcrypt');
 
-router.get("/", (req, res) => {
+
+
+router.get("/",isNotLoggedIn, (req, res) => {
   res.render("register");
 });
 
 
-router.post("/register_process", (req, res) => {
-  User.create({
+router.post("/register_process",isNotLoggedIn, async(req, res,next) => {
+  const {userId,password,nick}=req.body;
+  try{
+    const hash=await bcrypt.hash(password,12);
+    await User.create({
     userId: req.body.id,
-    password: req.body.password,
+    password: hash,
     nick: req.body.nick,
   });
-  res.redirect("/");
+  return res.redirect("/");
+  }catch(err){
+    console.error(err);
+    return next(err);
+  }
 });
 
-router.post("/idCheck", async (req, res, next) => {
+router.post("/idCheck", isNotLoggedIn,async (req, res, next) => {
   console.log(req.body.ids);
   try {
     const maxId = await User.findAll({
@@ -47,7 +58,7 @@ router.post("/idCheck", async (req, res, next) => {
   }
 });
 
-router.post("/nickCheck", async (req, res, next) => {
+router.post("/nickCheck", isNotLoggedIn, async (req, res, next) => {
   try {
     const maxId = await User.findAll({
       attributes: ["id"],
