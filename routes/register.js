@@ -6,12 +6,12 @@ const {isLoggedIn,isNotLoggedIn}=require('./middleware');
 const bcrypt=require('bcrypt');
 
 
-
 router.get("/",isNotLoggedIn, (req, res) => {
   res.render("register");
 });
 
 
+// register profile Save
 router.post("/register_process",isNotLoggedIn, async(req, res,next) => {
   const {userId,password,nick}=req.body;
   try{

@@ -6,6 +6,7 @@
     <title>board</title>
 </head>
 <body>
+  
   {% if type === 'list' %}
   <form action="/board/create" method="get">
     <input type="submit" value="create">
@@ -15,6 +16,7 @@
         <td>id</td>
         <td>title</td>
         <td>writer</td>
+        <td>views</td>
         <td>createdAt</td>
     </tr>
     {% for board in boards %}     
@@ -24,11 +26,13 @@
         <td>
           {{board.writer}}
         </td>
+        <td>{{board.views}}</td>
         <td>{{board.createdAt}}</td>
       </tr>
       {% endfor %}
     </table>
     
+
       {% elif type === 'view' %}
       <p>id:{{boards.id}}</p>
       <p>title:{{boards.title}}</p>
@@ -42,6 +46,8 @@
       <input type="submit" value="delete">
       </form>
       <input type="button" value="list" onclick="location.href='/board'">
+
+
       {% elif type === 'create' %}
       <form action="/board/create_process" method="post">
           <p><label for="title">
@@ -55,6 +61,7 @@
           </label></p>
           <input type="submit" value="create">
       </form>
+      
       
       {% elif type === 'update' %}
       <form action="/board/update_process/{{boards.id}}" method="post">
