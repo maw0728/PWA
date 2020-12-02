@@ -13,7 +13,6 @@ passport.use(new LocalStrategy(
     console.log('LocalStrategy',userId,password);
     try{
     const exUser=await User.findOne({where:{userId}});
-    console.log('exUser',exUser);
     if(exUser){
          const result = await bcrypt.compare(password,exUser.password);
             if(result){

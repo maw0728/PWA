@@ -17,6 +17,8 @@ module.exports = class Board extends Sequelize.Model {
         },
         views: {
             type: Sequelize.INTEGER,
+            allowNull:false,
+		        defaultValue:0,
           },
           comments: {
             type: Sequelize.INTEGER,
