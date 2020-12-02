@@ -10,9 +10,9 @@
   <body>
     <div id="container">
       <div id="header">
-        <div id="user">
+        <div id="layout-user">
           <ul>
-            <li id="nick">{{nick}}님 환영합니다</li>
+            <li id="layout-nick">{{nick}}님 환영합니다</li>
             <li><a href="/main">정보수정하기</a></li>
             <li><a href="/main">로그아웃</a></li>
           </ul>
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <div id="content">{% block content %} {% endblock %}</div>
+      <div id="layout-content">{% block content %} {% endblock %}</div>
     </div>
   </body>
   <scrip src="https://unpkg.com/axios/dist/axios.min.js"></scrip>
