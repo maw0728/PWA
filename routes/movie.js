@@ -38,7 +38,6 @@ router.get("/", async (req, res) => {
     res.status(200).render("movie/movieList", {
       type: "list",
       movie,
-      nick: req.user.nick,
       title: "영화조회하기",
     });
   } catch (error) {
