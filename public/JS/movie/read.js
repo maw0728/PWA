@@ -13,5 +13,5 @@ updates.onclick = () => {
   location.href = "/movie/update/" + updates.className;
 };
 deletes.onclick = () => {
-  location.href = "/movie/delete/{{movie.id}}" + updates.className;
+  location.href = "/movie/delete/" + updates.className;
 };
