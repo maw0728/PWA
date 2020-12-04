@@ -1,6 +1,8 @@
 const Sequelize = require("sequelize");
 
-module.exports = class User extends Sequelize.Model {
+module.exports = class User extends (
+  Sequelize.Model
+) {
   static init(sequelize) {
     return super.init(
       {
@@ -17,6 +19,10 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.STRING(20),
           allowNull: true,
           unique: true,
+        },
+        point: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
         },
       },
       {
