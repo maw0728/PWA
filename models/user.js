@@ -40,5 +40,7 @@ module.exports = class User extends (
   static associate(db) {
     db.User.hasMany(db.Board, { foreignKey: "userid", sourceKey: "id" });
     db.User.hasMany(db.Movie, { foreignKey: "userid", sourceKey: "id" });
-  }
-};
+    db.User.hasMany(db.Comment, {foreignKey : "userid", sourceKey:"id" });
+      
+    }
+  };
