@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start app.js --watch --time",
+    "start": "pm2 start app.js --watch --ignore-watch='node_modules videos' --time -i max",
     "poststart": "pm2 monit",
     "stop": "pm2 stop all",
     "test": "nodemon app"
