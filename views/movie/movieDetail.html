@@ -61,24 +61,16 @@
 <div id="movieTitle">
   <h1>{{movie.name}}</h1>
 </div>
-<input
-  type="button"
-  value="수정하기"
-  onclick="location.href='/movie/update/{{movie.id}}'"
-/>
-<input
-  type="button"
-  value="삭제하기"
-  onclick="location.href='/movie/delete/{{movie.id}}'"
-/>
+<input type="button" value="수정하기" id="update" class="{{movie.id}}" />
+<input type="button" value="삭제하기" id="delete" class="{{movie.id}}" />
 
 <video
   id="my-video"
   class="video-js"
   controls
   preload="auto"
-  width="640"
-  height="264"
+  width="720"
+  height="480"
   poster="MY_VIDEO_POSTER.jpg"
   data-setup="{}"
 >

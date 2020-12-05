@@ -72,6 +72,6 @@ module.exports = class Movie extends (
     );
   }
   static associate(db) {
-    db.Movie.belongsTo(db.User, { foreignKey: "userid", sourceKey: "id" });
+    db.Movie.belongsTo(db.User, { foreignKey: "userid", targetKey: "id" });
   }
 };
