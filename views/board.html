@@ -34,10 +34,36 @@
     
 
       {% elif type === 'view' %}
-      <p>id:{{boards.id}}</p>
-      <p>title:{{boards.title}}</p>
-      <p>writer:{{boards.writer}}</p>
-      <p>content:{{boards.content}}</p>
+      <table>
+        <tr>
+        <td>title</td>
+        <td>content</td>
+        <td>writer</td>
+        <td>views</td>
+        <td>createdAt</td>
+        </tr>     
+      <tr>
+        <td>{{boards.title}}</td>
+        <td>{{boards.content}}</td>
+        <td>{{boards.writer}}</td>
+        <td>{{boards.views}}</td>
+        <td>{{boards.createdAt}}</td>
+      </tr>
+      </table>
+      <p>-------------------------------</p>
+      
+      <table>
+        <tr>
+          <td>commentWriter</td>
+          <td>comments</td>
+        </tr>
+        
+        <tr>
+          <td>{{comment.commentWriter}}</td>
+          <td>{{comment.comments}}</td>
+        </tr>
+        
+      </table>
       
       <form action="/board/update/{{boards.id}}" method="post">
           <input type="submit" value="update">
@@ -47,6 +73,11 @@
       </form>
       <input type="button" value="list" onclick="location.href='/board'">
 
+        <form action="/board/comment_process" method="post">
+          <input type="text" name="commentWriter" id="commentWriter" placeholder="commentWriter" >
+          <input type="text" name="comments" id="comments" placeholder="comments" >
+          <input type="submit" value="register">
+        </form>
 
       {% elif type === 'create' %}
       <form action="/board/create_process" method="post">

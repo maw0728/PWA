@@ -1,8 +1,10 @@
 const express = require("express");
 const User = require("../models/user");
 const Board = require('../models/board');
+const Comment=require('../models/comment');
 const router = express.Router();
 const {isLoggedIn,isNotLoggedIn}=require('./middleware');
+const { render } = require('nunjucks');
 
 
 router.use('*',isLoggedIn);
@@ -45,10 +47,11 @@ router.post('/create_process',(req,res)=>{
 //title click => detail page
 router.get('/:id',async(req,res,next)=>{
     try{
-    const boards=await Board.findOne({where:{id:req.params.id}});
+    const boards = await Board.findOne({where:{id:req.params.id}});
     boards.views=boards.views+1;
     boards.save();
-    res.render('board',{boards,type:"view"});
+    
+    res.render('board',{boards, type:"view"});
     }catch(err){
         console.error(err);
         next();
@@ -89,7 +92,21 @@ router.post('/delete/:id',async(req,res,next)=>{
         console.error(err);
         next();
     }
-})
+});
+
+router.post('/comment_process',async(req,res)=>{
+    const {commentWriter,comments}=req.body;
+    try{
+    const comment= await Comment.create({
+        commentWriter,
+        comments,
+    });
+        console.log('댓글추가완료');
+        res.render("board",{comment,type:"view"});
+    }catch(err){
+        console.error(err);
+    }}
+)
 
 
 module.exports=router;

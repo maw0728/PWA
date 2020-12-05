@@ -13,7 +13,7 @@ const pageRouter = require("./routes/index");
 const registerRouter = require("./routes/register");
 const movie = require("./routes/movie");
 const boardRouter = require("./routes/board");
-const { sequelize, User, Board } = require("./models");
+const { sequelize, User, Board, Comment } = require("./models");
 
 const app = express();
 passportConfig();
