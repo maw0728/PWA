@@ -30,6 +30,6 @@ module.exports = class Point extends (
     );
   }
   static associate(db) {
-    db.Point.belongsTo(db.User, { foreignKey: "userid", sourceKey: "id" });
+    db.Point.belongsTo(db.User, { foreignKey: "userid", targetKey: "id" });
   }
 };
