@@ -20,7 +20,7 @@ exports.isLoggedIn = async (req, res, next) => {
     } else if (point >= 100000000) {
       res.locals.medal = "grandmaster_1";
     } else if (point >= 10000000) {
-      res.locals.medal = "mastre";
+      res.locals.medal = "mastre_1";
     } else if (point >= 7500000) {
       res.locals.medal = "diamond_1";
     } else if (point >= 5000000) {
