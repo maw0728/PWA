@@ -50,8 +50,8 @@ router.get('/:id',async(req,res,next)=>{
     const boards = await Board.findOne({where:{id:req.params.id}});
     boards.views=boards.views+1;
     boards.save();
-    
-    res.render('board',{boards, type:"view"});
+    const comment= Comment.findAll();
+    res.render('board',{boards,comment, type:"view"});
     }catch(err){
         console.error(err);
         next();
@@ -95,14 +95,16 @@ router.post('/delete/:id',async(req,res,next)=>{
 });
 
 router.post('/comment_process',async(req,res)=>{
-    const {commentWriter,comments}=req.body;
+    const {commentWriter,comments,id}=req.body;
+    const boards=await Board.findOne({where:id});
     try{
     const comment= await Comment.create({
         commentWriter,
         comments,
     });
+    console.log(comment.commentWriter)
         console.log('댓글추가완료');
-        res.render("board",{comment,type:"view"});
+        res.render('board',{comment,boards,type:"view"})
     }catch(err){
         console.error(err);
     }}
