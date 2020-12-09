@@ -28,6 +28,6 @@ module.exports = class Comment extends Sequelize.Model {
   }
   static associate(db){
     db.Comment.belongsTo(db.User,{foreignKey :"userid",targetKey:"id"});
-    db.Comment.belongsTo(db.Board,{foreignKey:"userid",targetKey:"id"})
+    
   }
 };

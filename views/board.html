@@ -37,10 +37,22 @@
 </table>
 
 {% elif type === 'view' %}
-<p>id:{{boards.id}}</p>
-<p>title:{{boards.title}}</p>
-<p>writer:{{boards.writer}}</p>
-<p>content:{{boards.content}}</p>
+<table>
+  <tr>
+    <td>title</td>
+    <td>content</td>
+    <td>writer</td>
+    <td>views</td>
+    <td>createdAt</td>
+  </tr>
+  <tr>
+    <td>{{boards.title}}</td>
+    <td>{{boards.content}}</td>
+    <td>{{boards.writer}}</td>
+    <td>{{boards.views}}</td>
+    <td>{{boards.createdAt}}</td>
+  </tr>
+</table>
 
 <form action="/board/update/{{boards.id}}" method="post">
   <input type="submit" value="update" />
@@ -49,6 +61,24 @@
   <input type="submit" value="delete" />
 </form>
 <input type="button" value="list" onclick="location.href='/board'" />
+<form action="/board/comment_process" method="post">
+  <p><input type="text" name="commentWriter" id="commentWriter" placeholder="commentWriter"></p>
+  <p><textarea name="comments" id="comments" cols="30" rows="10" placeholder="comments"></textarea></p>
+  <input type="submit" value="register">
+</form>
+
+
+<table>
+  <tr>
+    <td>commentWriter</td>
+    <td>comments</td>
+  </tr>
+  <tr>
+    <td>{{comment.commentWriter}}</td>
+    <td>{{comment.comments}}</td>
+  </tr>
+</table>
+
 
 {% elif type === 'create' %}
 <form action="/board/create_process" method="post">
